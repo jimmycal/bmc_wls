@@ -3,7 +3,7 @@
 # Recipe:: install-12c
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
-include_recipe "wls::install-wls122"
+include_recipe "bmcwls::install-wls122"
 
 os_user = node['env-122']['os_user']
 os_group = node['env-122']['os_installer_group']

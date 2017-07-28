@@ -16,7 +16,7 @@ ENV['TZ'] = node['env-122']['os_timezone']
 domain_template_jar = File.join(node['env-122']['installer_path'], node['domain-packed']['domain_template_file'])
 
 remote_file domain_template_jar do
-	source "#{node['domain-packed']['domain_template_url']}"
+	source {node['domain-packed']['domain_template_url']}
 	action :create_if_missing
 	only_if { node['domain-packed']['remote_install'] }
 	owner os_user
