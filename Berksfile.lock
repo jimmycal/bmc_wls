@@ -1,0 +1,28 @@
+DEPENDENCIES
+  bmcwls
+    path: .
+    metadata: true
+  chef-sugar (~> 3.4.0)
+  firewall (~> 2.6.2)
+  java (~> 1.50.0)
+  systemd (= 2.0.0)
+
+GRAPH
+  apt (6.1.2)
+  bmcwls (0.1.2)
+    chef-sugar (>= 0.0.0)
+    firewall (>= 0.0.0)
+    java (>= 0.0.0)
+    systemd (>= 0.0.0)
+  chef-sugar (3.4.0)
+  firewall (2.6.2)
+    chef-sugar (>= 0.0.0)
+  homebrew (4.2.0)
+  java (1.50.0)
+    apt (>= 0.0.0)
+    homebrew (>= 0.0.0)
+    windows (>= 0.0.0)
+  ohai (5.1.0)
+  systemd (2.0.0)
+  windows (3.1.1)
+    ohai (>= 4.0.0)
