@@ -1,0 +1,53 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-7.1
+    driver:
+      box: "opscode_centos-7.1"
+      box_url: "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.1_chef-provisionerless.box"
+      network:
+      - ["private_network", {ip: "192.168.33.36"}]
+      synced_folders:
+        - ["../software", "/opt/installers"]
+  - name: centos-6.8
+    driver:
+      network:
+      - ["private_network", {ip: "192.168.33.35"}]
+      synced_folders:
+        - ["../software", "/opt/installers"]
+  - name: ubuntu-12.04
+    driver:
+      network:
+      - ["private_network", {ip: "192.168.33.34"}]
+      synced_folders:
+      - ["../software", "/opt/installers"]
+
+
+suites:
+  - name: wls
+    run_list:
+      - recipe[bmcwls::install-wls122]
+      - recipe[bmcwls::create_domain]
+    attributes: {"domain-mt":{
+      "name":"Demo",
+      "admin_server":{"port":"7001", "sslport":"7002"}
+    }}
+  - name: otd
+    run_list:
+      - recipe[bmcwls::install-otd122]
+      - recipe[bmcwls::unpack_adminserver]
+    attributes: {  "domain-packed":{
+        "domain_template_file":"otd_domain.jar"
+      }}
+  - name: wls_packed
+    run_list:
+      - recipe[bmcwls::install-wls122]
+      - recipe[bmcwls::unpack_adminserver]
+    attributes: {  "domain-packed":{
+      "domain_template_file":"base_domain.jar"
+    }}

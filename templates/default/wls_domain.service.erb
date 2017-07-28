@@ -1,0 +1,14 @@
+[Unit]
+Description=Starts weblogic nodemanager, admin server and managed servers of osb_domain
+Wants=network.target
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory= <%= @wl_home %>/common/bin
+ExecStart= <%= @wl_home %>/common/bin/wlst.sh <%= @start_servers_py %>
+User= <%= @os_user %>
+
+[Install]
+WantedBy=multi-user.target
